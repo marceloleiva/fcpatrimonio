@@ -33,3 +33,12 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+
+#Configuracion DreamHost
+django-setup.py
+passenger_wsgi.*
+tmp/
+
+#Virtaulenv
+env
