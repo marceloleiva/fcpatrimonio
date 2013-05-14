@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap_toolkit %}
+
+{% block body %}
+    <div class="hero-unit">
+        <fieldset>
+            <legend>Ingresar Usuario</legend>
+            <form action="" method="post" class="form-horizontal">
+                {% csrf_token %}
+                {{ user_form|as_bootstrap }}
+                {{ usuario_form|as_bootstrap }}
+                <div class="controls">
+                    <input type="submit" value="Ingresar Usuario" class="btn btn-primary">
+                </div>
+            </form>
+        </fieldset>
+    </div>
+{% endblock %}

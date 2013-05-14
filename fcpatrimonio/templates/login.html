@@ -1,0 +1,23 @@
+{% extends "base_logout.html" %}
+{% load url from future %}
+
+{% block body %}
+
+<div class="container">
+    {% if form.errors %}
+        <p class="error_form">El nombre de usuario y la contraseña no coinciden. Vuelve a intentarlo.</p>
+    {% endif %}
+    <form class="form-signin" method="post" action="{% url 'login' %}" autocomplete="off">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Ingresar</h2>
+        {{ login_form.username }}
+        {{ login_form.username.errors }}
+        {{ login_form.password }}
+        {{ login_form.password.errors }}
+        {{ login_form.sucursal }}
+        <button class="btn btn-large btn-primary" type="submit">Ingresar</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+</div>
+
+{% endblock %}
