@@ -46,3 +46,7 @@ env
 
 #IDE
 .idea
+../.idea/
+
+#Os
+.DS_Store
