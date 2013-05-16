@@ -42,3 +42,7 @@ tmp/
 
 #Virtaulenv
 env
+
+
+#IDE
+.idea
