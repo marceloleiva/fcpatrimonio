@@ -13,7 +13,6 @@
 
         <form action="" method="post" class="form-horizontal">
             {% csrf_token %}
-            {{ user_form|as_bootstrap }}
             {{ usuario_form|as_bootstrap }}
             <div class="controls">
                 <input type="submit" value="Ingresar Usuario" class="btn btn-primary">
@@ -22,4 +21,18 @@
 
     </div>
 </div>
+
 {% endblock %}
+
+{%  block script %}
+
+<script>
+  $(function() {
+    $( "#id_date_of_birth" ).datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+  });
+</script>
+
+{% endblock %}
+

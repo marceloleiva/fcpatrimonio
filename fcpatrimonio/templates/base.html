@@ -69,8 +69,8 @@
 
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="icon-copy"></i>
-							<span>Sample Pages</span>
+							<i class="icon-signal"></i>
+							<span>Reportes</span>
 							<b class="caret"></b>
 						</a>
 
@@ -118,7 +118,7 @@
         </div>
     </div>
 
-    <div class="footer">
+{% comment %}    <div class="footer">
         <div class="container">
             <div class="row">
                 <div id="footer-copyright" class="span6">
@@ -129,7 +129,7 @@
                 </div> <!-- /.span6 -->
             </div> <!-- /row -->
         </div> <!-- /container -->
-    </div> <!-- /footer -->
+    </div> <!-- /footer -->{% endcomment %}
 
 
     <script src="{% static 'js/libs/jquery-1.9.1.min.js' %}" ></script>
@@ -144,8 +144,7 @@
 
     <script src="{% static 'js/Application.js' %}" ></script>
 
-    <script src="{% static 'js/charts/area.js' %}" ></script>
-    <script src="{% static 'js/charts/donut.js' %}" ></script>
+    {%  block script %}{% endblock %}
 
     <a id="back-to-top" href="#top" style="display: block;">
         <i class="icon-chevron-up"></i>

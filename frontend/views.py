@@ -11,6 +11,10 @@ from form import LoginForm
 
 
 def login(request):
+
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/home')
+
     login_form = LoginForm(request.POST or None)
     form_login = login_form.is_valid()
 
