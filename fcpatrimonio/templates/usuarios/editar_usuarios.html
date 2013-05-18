@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 {% load bootstrap_toolkit %}
 {% block body %}
-    <h3> Editar Usuario </h3>
+
+<div class="widget stacked">
+    <div class="widget-header">
+        <i class="icon-check"></i>
+        <h3>Editar Usuario</h3>
+    </div> <!-- /widget-header -->
+
+    <div class="widget-content">
+    <br />
+
     <form action="" method="post" class="form-horizontal">
     {% csrf_token %}
     {{ usuario_form|as_bootstrap }}
-    <div class="form-actions">
+    <div class="controls">
         <input type="submit" value="Editar Usuario" class="btn btn-primary">
     </div>
     </form>
+
+    </div>
+</div>
 {% endblock %}

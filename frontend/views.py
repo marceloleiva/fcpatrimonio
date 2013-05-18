@@ -9,6 +9,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from form import LoginForm
 
+
 def login(request):
     login_form = LoginForm(request.POST or None)
     form_login = login_form.is_valid()
@@ -20,10 +21,10 @@ def login(request):
 
         if user:
             auth_login(request, user)
-            messages.success(request, 'Bienvenido '+request.user.get_short_name()+'.')
+            messages.success(request, 'Bienvenido ' + request.user.get_short_name() + '.')
             return HttpResponseRedirect('/home')
         else:
-            messages.error(request,'Tu nombre de usuario o contraseña es incorrecto.')
+            messages.error(request, 'Tu nombre de usuario o contraseña es incorrecto.')
 
     context = {
         'login_form': login_form,

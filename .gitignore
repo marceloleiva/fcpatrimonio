@@ -43,8 +43,9 @@ tmp/
 #Virtaulenv
 env
 
-#Ides
-.idea/
+
+#IDE
+.idea
 ../.idea/
 
 #Os
