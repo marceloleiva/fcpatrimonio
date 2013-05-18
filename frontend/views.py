@@ -20,7 +20,7 @@ def login(request):
 
         if user:
             auth_login(request, user)
-            messages.success(request,'Bienvenido '+request.user.get_profile().nombre+'.')
+            messages.success(request,'Bienvenido '+request.user.get_short_name()+'.')
             return HttpResponseRedirect('/home')
         else:
             messages.error(request,'Tu nombre de usuario o contraseña es incorrecto.')
