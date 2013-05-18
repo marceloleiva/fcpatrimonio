@@ -192,7 +192,7 @@ LOGGING = {
 }
 
 
-AUTH_PROFILE_MODULE = 'usuarios.PerfilUsuario'
+AUTH_USER_MODEL = 'usuarios.PerfilUsuario'
 
 LOGIN_REDIRECT_URL = '/home/'
 
