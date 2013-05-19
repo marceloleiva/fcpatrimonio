@@ -1,5 +1,69 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load bootstrap_toolkit %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'js/plugins/lightbox/themes/evolution-dark/jquery.lightbox.css' %}" >
+
+    <style>
+        .btn {
+            margin-right: 1em;
+            margin-bottom: 1em;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
+<div class="widget stacked">
+    <div class="widget-header">
+        <i class="icon-table"></i>
+        <h3>Actividades</h3>
+    </div> <!-- /widget-header -->
 
+    <div class="widget-content">
+    <br />
+
+            <table class="table table-bordered table-striped table-highlight">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Fecha</th>
+                        <th>Inicio</th>
+                        <th>Término</th>
+                        <th>Estado</th>
+                        <th>Ubicación</th>
+                        <th>Usuario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for actividad in actividades %}
+                    <tr>
+                        <td>{{ actividad.id }}</td>
+                        <td>{{ actividad.fecha_actividad }}</td>
+                        <td>{{ actividad.inicio_actividad }}</td>
+                        <td>{{ actividad.termino_actividad }}</td>
+                        <td>
+                            {% if actividad.estado %}
+                                <a href="#" class="btn btn-small btn-success"><i class="icon-ok btn-small"></i></a>
+                            {% else %}
+                                <a href="#" class="btn btn-small btn-danger "><i class="icon-exclamation-sign btn-small"></i></a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="http://maps.google.com/maps?q={{ actividad.latitud }},{{ actividad.longitud }}&hl=es&z=12&markers=color:blue&lightbox[width]=610&lightbox[height]=360" class="btn btn-small btn-warning lightbox-type"><i class="icon-map-marker"></i> Mapa</a>
+                        </td>
+                        <td>{{ actividad.usuario.get_full_name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{%  block script %}
+    <script src="{% static 'js/plugins/lightbox/jquery.lightbox.min.js' %}" ></script>
+    <script src="{% static 'js/demo/notifications.js' %}" ></script>
 {% endblock %}

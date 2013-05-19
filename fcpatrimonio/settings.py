@@ -159,6 +159,8 @@ INSTALLED_APPS = (
 
     'frontend',
     'usuarios',
+    'actividades',
+    'reportes',
 
 )
 

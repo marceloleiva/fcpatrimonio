@@ -39,14 +39,15 @@ class PerfilUsuario(AbstractBaseUser):
 
     def get_full_name(self):
         # For this case we return email. Could also be User.first_name User.last_name if you have these fields
-        return '%s , %s' % self.first_name, self.apellidos
+        full_name = '%s %s' % (self.first_name, self.last_name)
+        return full_name.strip()
 
     def get_short_name(self):
         # For this case we return email. Could also be User.first_name if you have this field
         return self.first_name
 
     def __unicode__(self):
-        return self.last_name
+        return self.get_full_name()
 
     def has_perm(self, perm, obj=None):
         # Handle whether the user has a specific permission?"
