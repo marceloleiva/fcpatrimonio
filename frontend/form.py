@@ -6,7 +6,7 @@ from django import forms
 
 class LoginForm(forms.Form):
     username = forms.CharField(help_text="", widget=forms.TextInput(
-        attrs={'placeholder': 'Nombre de usuario',
+        attrs={'placeholder': 'Correo electronico',
                'class': 'login username-field',
                'required': 'required'}
     ))
