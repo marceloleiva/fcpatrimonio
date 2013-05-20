@@ -1,6 +1,7 @@
 # Django settings for fcpatrimonio project.
 
 import os
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
 
@@ -39,7 +40,7 @@ TIME_ZONE = 'America/Santiago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'es-CL'
+LANGUAGE_CODE = 'es'
 
 SITE_ID = 1
 
@@ -156,6 +157,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'bootstrap_toolkit',
+    'endless_pagination',
 
     'frontend',
     'usuarios',
@@ -193,6 +195,9 @@ LOGGING = {
     }
 }
 
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+)
 
 AUTH_USER_MODEL = 'usuarios.PerfilUsuario'
 
@@ -200,3 +205,5 @@ LOGIN_REDIRECT_URL = '/home/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+#PAGINADOR
+ENDLESS_PAGINATION_PER_PAGE = 10

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% load bootstrap_toolkit %}
+{% load endless %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'js/plugins/lightbox/themes/evolution-dark/jquery.lightbox.css' %}" >
@@ -10,60 +11,76 @@
             margin-right: 1em;
             margin-bottom: 1em;
         }
+        .endless_container{
+            text-align: center;
+            background-color: #D9EDF7;
+            border: 1px solid #BCE8F1;
+        }
+        .endless_container a{
+            display: block;
+            padding: 5px 20px;
+        }
     </style>
 {% endblock %}
 
 {% block body %}
-<div class="widget stacked">
-    <div class="widget-header">
-        <i class="icon-table"></i>
-        <h3>Actividades</h3>
-    </div> <!-- /widget-header -->
+<div class="row-fluid">
+    <div class="span9">
+        <div class="widget stacked">
+            <div class="widget-header">
+                <i class="icon-table"></i>
+                <h3>Actividades</h3>
+            </div> <!-- /widget-header -->
 
-    <div class="widget-content">
-    <br />
+            <div class="widget-content">
+                <br />
+                {% include page_template %}
+            </div>
+        </div>
+    </div>
+    <div class="span3">
+        <div class="widget stacked">
+            <div class="widget-header">
+                <i class="icon-table"></i>
+                <h3>Buscar</h3>
+            </div> <!-- /widget-header -->
 
-            <table class="table table-bordered table-striped table-highlight">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Fecha</th>
-                        <th>Inicio</th>
-                        <th>Término</th>
-                        <th>Estado</th>
-                        <th>Ubicación</th>
-                        <th>Usuario</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for actividad in actividades %}
-                    <tr>
-                        <td>{{ actividad.id }}</td>
-                        <td>{{ actividad.fecha_actividad }}</td>
-                        <td>{{ actividad.inicio_actividad }}</td>
-                        <td>{{ actividad.termino_actividad }}</td>
-                        <td>
-                            {% if actividad.estado %}
-                                <a href="#" class="btn btn-small btn-success"><i class="icon-ok btn-small"></i></a>
-                            {% else %}
-                                <a href="#" class="btn btn-small btn-danger "><i class="icon-exclamation-sign btn-small"></i></a>
-                            {% endif %}
-                        </td>
-                        <td>
-                            <a href="http://maps.google.com/maps?q={{ actividad.latitud }},{{ actividad.longitud }}&hl=es&z=12&markers=color:blue&lightbox[width]=610&lightbox[height]=360" class="btn btn-small btn-warning lightbox-type"><i class="icon-map-marker"></i> Mapa</a>
-                        </td>
-                        <td>{{ actividad.usuario.get_full_name }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-
+            <div class="widget-content">
+                <br />
+{% comment %}                <form>
+                  <fieldset>
+                    <label>Label name</label>
+                    <input type="text" placeholder="Type something…">
+                    <button type="submit" class="btn">Buscar</button>
+                  </fieldset>
+                </form>{% endcomment %}
+            </div>
+        </div>
     </div>
 </div>
-
 {% endblock %}
 
 {%  block script %}
+
     <script src="{% static 'js/plugins/lightbox/jquery.lightbox.min.js' %}" ></script>
     <script src="{% static 'js/demo/notifications.js' %}" ></script>
+    <script>
+    $('.subnav-collapse ul li').eq(0).addClass('active');
+    $('.subnav-collapse ul li').eq(0).click(function(e){
+        if(!$('.subnav-collapse ul li').eq(0).hasClass('active')) {
+            $('.subnav-collapse ul li').eq(0).addClass('active');
+        }
+    });
+    $('.subnav-collapse ul li ul li').click(function(e) {
+        var $this = $(this);
+        $('.subnav-collapse ul li').removeClass('active');
+        if (!$this.parent().parent().hasClass('active')) {
+            $this.parent().parent().addClass('active');
+        }
+    });
+    </script>
+
+{{ block.super }}
+    <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+    <script>$.endlessPaginate();</script>
 {% endblock %}

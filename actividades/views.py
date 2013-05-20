@@ -8,18 +8,17 @@ from django.contrib import messages
 from usuarios.form import UsuarioForm, UsuarioFormEdit
 from usuarios.models import PerfilUsuario
 
+from endless_pagination.decorators import page_template
+
 from datetime import *
 
+@page_template('page_template.html')
 @login_required(login_url='/')
-def actividades (request):
+def actividades (request, template='index.html', extra_context=None):
     actividades = Actividades.objects.all()
-
-    for actividad in actividades:
-        inicio = actividad.inicio_actividad
-        termino = actividad.termino_actividad
-        print inicio
-
     context = {
         'actividades': actividades,
     }
-    return render_to_response('index.html', context, context_instance=RequestContext(request))
+    if extra_context is not None:
+        context.update(extra_context)
+    return render_to_response(template, context, context_instance=RequestContext(request))

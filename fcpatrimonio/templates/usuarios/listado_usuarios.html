@@ -2,49 +2,51 @@
 {% load bootstrap_toolkit %}
 
 {% block body %}
-<div class="widget stacked">
-    <div class="widget-header">
-        <i class="icon-table"></i>
-        <h3>Usuarios</h3>
-    </div> <!-- /widget-header -->
+<div class="span12">
+    <div class="widget stacked">
+        <div class="widget-header">
+            <i class="icon-table"></i>
+            <h3>Usuarios</h3>
+        </div> <!-- /widget-header -->
 
-    <div class="widget-content">
-    <br />
+        <div class="widget-content">
+        <br />
 
-            <table class="table table-bordered table-striped table-highlight">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Celular</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for usuario in usuarios %}
-                    <tr {% if usuario.user.is_active == 0 %}class="error" {% endif %}>
-                        <td>{{ usuario.id }}</td>
-                        <td>{{ usuario.first_name }} {{ usuario.last_name }}</td>
-                        <td>{{ usuario.celular }}</td>
-                        <td>
-                            {% if usuario.is_staff %}
-                                <a href="#" class="btn btn-small btn-info"><i class="icon-user"></i></a>
-                                <a href="{% url 'usuarios:editar_usuario'  usuario.pk %}" class="btn btn-small btn-warning"><i class="icon-pencil"></i></a>
-                            {% else %}
-                                <a href="#" class="btn btn-small btn-info"><i class="icon-user"></i></a>
-                                <a href="{% url 'usuarios:editar_usuario'  usuario.pk %}" class="btn btn-small btn-warning"><i class="icon-pencil"></i></a>
-                                {% if usuario.is_active == 1 %}
-                                    <a href="{% url 'usuarios:eliminar_usuario'  usuario.pk %}" class="btn btn-small btn-danger"><i class="icon-remove"></i></a>
+                <table class="table table-bordered table-striped table-highlight">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Celular</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for usuario in usuarios %}
+                        <tr {% if usuario.user.is_active == 0 %}class="error" {% endif %}>
+                            <td>{{ usuario.id }}</td>
+                            <td>{{ usuario.first_name }} {{ usuario.last_name }}</td>
+                            <td>{{ usuario.celular }}</td>
+                            <td>
+                                {% if usuario.is_staff %}
+                                    <a href="#" class="btn btn-small btn-info"><i class="icon-user"></i></a>
+                                    <a href="{% url 'usuarios:editar_usuario'  usuario.pk %}" class="btn btn-small btn-warning"><i class="icon-pencil"></i></a>
                                 {% else %}
-                                    <a href="{% url 'usuarios:activar_usuario'  usuario.pk %}" class="btn btn-small btn-success"><i class="icon-ok"></i></a>
+                                    <a href="#" class="btn btn-small btn-info"><i class="icon-user"></i></a>
+                                    <a href="{% url 'usuarios:editar_usuario'  usuario.pk %}" class="btn btn-small btn-warning"><i class="icon-pencil"></i></a>
+                                    {% if usuario.is_active == 1 %}
+                                        <a href="{% url 'usuarios:eliminar_usuario'  usuario.pk %}" class="btn btn-small btn-danger"><i class="icon-remove"></i></a>
+                                    {% else %}
+                                        <a href="{% url 'usuarios:activar_usuario'  usuario.pk %}" class="btn btn-small btn-success"><i class="icon-ok"></i></a>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
+        </div>
     </div>
 </div>
 {% endblock %}
