@@ -6,7 +6,7 @@ from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from usuarios.form import UsuarioForm, UsuarioFormEdit
-from usuarios.models import PerfilUsuario
+from usuarios.models import Usuario
 
 from endless_pagination.decorators import page_template
 

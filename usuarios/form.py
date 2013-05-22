@@ -6,13 +6,13 @@ __author__ = 'Marcelo'
 import re
 from django import forms
 from django.contrib.auth.models import User
-from models import PerfilUsuario
+from models import Usuario
 
 
 ROLES = [
-   (1, 'Consulata'),
+   (1, 'Consultor'),
    (2, 'Guarda bosques'),
-   (3, 'Jafe de area'),
+   (3, 'Jefe de area'),
    (4, 'Administrador'),
 ]
 
@@ -23,7 +23,7 @@ class UsuarioForm(forms.ModelForm):
     rol = forms.ChoiceField(choices=ROLES, widget=forms.RadioSelect())
 
     class Meta:
-        model = PerfilUsuario
+        model = Usuario
         exclude = ['date_joined', 'last_login', 'is_admin', 'is_staff', 'is_superuser', 'is_active']
 
     def clean_rut(self):
@@ -39,9 +39,9 @@ class UsuarioForm(forms.ModelForm):
                 s = 0
             if d == str(s):
                 try:
-                    usuario = PerfilUsuario.objects.get(rut=rut)
+                    usuario = Usuario.objects.get(rut=rut)
                     raise forms.ValidationError('El rut ingresado se encuentra registrado')
-                except PerfilUsuario.DoesNotExist:
+                except Usuario.DoesNotExist:
                     pass
             else:
                 raise forms.ValidationError('El rut ingresado no es correcto')
@@ -54,5 +54,5 @@ class UsuarioFormEdit(forms.ModelForm):
     rut = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
 
     class Meta:
-        model = PerfilUsuario
+        model = Usuario
         exclude = ['date_joined', 'last_login', 'is_admin', 'is_staff', 'is_superuser', 'is_active', 'password']

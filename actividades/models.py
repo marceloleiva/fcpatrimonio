@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from usuarios.models import PerfilUsuario
+from usuarios.models import Usuario
 
 
 class Actividades(models.Model):
-    usuario = models.ForeignKey(PerfilUsuario)
+    usuario = models.ForeignKey(Usuario)
     fecha_actividad = models.DateField()
     inicio_actividad = models.TimeField()
     termino_actividad = models.TimeField()

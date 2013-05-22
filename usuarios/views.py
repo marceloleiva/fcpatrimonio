@@ -5,7 +5,7 @@ from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from usuarios.form import UsuarioForm, UsuarioFormEdit
-from usuarios.models import PerfilUsuario
+from usuarios.models import Usuario
 
 @login_required(login_url='/')
 def ingresar_usuario (request):
@@ -16,7 +16,7 @@ def ingresar_usuario (request):
         usuario.set_password(usuario_form.cleaned_data['password'])
         usuario.save()
         messages.success(request,'El usuario se ingresó correctamente.')
-        return HttpResponseRedirect('/home')
+        return HttpResponseRedirect('/usuarios')
     context = {
         'usuario_form' : usuario_form,
     }
@@ -25,14 +25,14 @@ def ingresar_usuario (request):
 
 @login_required(login_url='/')
 def editar_usuario(request, object_id):
-    usuario = PerfilUsuario.objects.get(id=object_id)
+    usuario = Usuario.objects.get(id=object_id)
     print usuario
     if request.method == 'POST':
         recepcionista_form = UsuarioFormEdit(request.POST, instance=usuario)
         if recepcionista_form.is_valid():
             recepcionista_form.save()
             messages.success(request,'El usuario se actualizó correctamente.')
-            return HttpResponseRedirect('/home')
+            return HttpResponseRedirect('/usuarios')
     else:
         usuario_form = UsuarioFormEdit(instance=usuario)
     context = {
@@ -43,7 +43,7 @@ def editar_usuario(request, object_id):
 
 @login_required(login_url='/')
 def listar_usuarios(request):
-    lista = PerfilUsuario.objects.all()
+    lista = Usuario.objects.all()
     context = {
         'usuarios' : lista,
     }
@@ -53,7 +53,7 @@ def listar_usuarios(request):
 @login_required(login_url='/')
 def eliminar_usuario(request, id):
     try:
-        usuario = PerfilUsuario.objects.get(id=id)
+        usuario = Usuario.objects.get(id=id)
         if usuario.is_active:
             usuario.is_active = False
             usuario.save()
@@ -68,10 +68,10 @@ def eliminar_usuario(request, id):
 
 @login_required(login_url='/')
 def activar_usuario(request, id):
-    usuario = PerfilUsuario.objects.get(pk=id)
+    usuario = Usuario.objects.get(pk=id)
     print usuario.is_active
     try:
-        usuario = PerfilUsuario.objects.get(pk=id)
+        usuario = Usuario.objects.get(pk=id)
         if usuario.is_active:
             messages.success(request,'El usuario ya se encuentra activo en el sistema.')
             return HttpResponseRedirect('/administrar/usuarios')

@@ -158,6 +158,7 @@ INSTALLED_APPS = (
 
     'bootstrap_toolkit',
     'endless_pagination',
+    'south',
 
     'frontend',
     'usuarios',
@@ -199,7 +200,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
 )
 
-AUTH_USER_MODEL = 'usuarios.PerfilUsuario'
+AUTH_USER_MODEL = 'usuarios.Usuario'
 
 LOGIN_REDIRECT_URL = '/home/'
 
