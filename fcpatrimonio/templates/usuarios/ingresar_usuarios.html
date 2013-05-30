@@ -14,7 +14,8 @@
 
             <form action="" method="post" class="form-horizontal">
                 {% csrf_token %}
-                {{ usuario_form|as_bootstrap }}
+                {{ user_form|as_bootstrap }}
+                {{ perfil_form|as_bootstrap }}
                 <div class="controls">
                     <input type="submit" value="Ingresar Usuario" class="btn btn-primary">
                 </div>

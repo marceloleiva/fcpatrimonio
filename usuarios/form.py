@@ -6,25 +6,34 @@ __author__ = 'Marcelo'
 import re
 from django import forms
 from django.contrib.auth.models import User
-from models import Usuario
+from models import Perfil
 
 
 ROLES = [
-   (1, 'Consultor'),
-   (2, 'Guarda bosques'),
-   (3, 'Jefe de area'),
-   (4, 'Administrador'),
+    (1, 'Consultor'),
+    (2, 'Guarda bosques'),
+    (3, 'Jefe de area'),
+    (4, 'Administrador'),
 ]
 
-class UsuarioForm(forms.ModelForm):
+
+class UserForm(forms.ModelForm):
+    username = forms.CharField(help_text="", min_length= 6, max_length= 15)
+    password = forms.CharField(widget=forms.PasswordInput(render_value=False), min_length=6, max_length=15, help_text="")
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')
+
+
+class PerfilForm(forms.ModelForm):
     rut = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ej: 11111111-1'}), min_length=8, max_length=10)
     celular = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Solo Números'}), min_length=8, max_length=8)
-    date_of_birth = forms.DateField(label='Fecha de nacimiento', widget=BootstrapDateInput(format='%d/%m/%Y', attrs={'class':'datePicker', 'readonly':'true'}))
     rol = forms.ChoiceField(choices=ROLES, widget=forms.RadioSelect())
 
     class Meta:
-        model = Usuario
-        exclude = ['date_joined', 'last_login', 'is_admin', 'is_staff', 'is_superuser', 'is_active']
+        model = Perfil
+        exclude = ['usuario']
 
     def clean_rut(self):
         rut = self.cleaned_data.get('rut')
@@ -39,9 +48,9 @@ class UsuarioForm(forms.ModelForm):
                 s = 0
             if d == str(s):
                 try:
-                    usuario = Usuario.objects.get(rut=rut)
+                    usuario = Perfil.objects.get(rut=rut)
                     raise forms.ValidationError('El rut ingresado se encuentra registrado')
-                except Usuario.DoesNotExist:
+                except Perfil.DoesNotExist:
                     pass
             else:
                 raise forms.ValidationError('El rut ingresado no es correcto')
@@ -50,9 +59,10 @@ class UsuarioForm(forms.ModelForm):
         return rut
 
 
-class UsuarioFormEdit(forms.ModelForm):
-    rut = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+class PerfilFormEdit(forms.ModelForm):
+
+    rut=forms.CharField(widget=forms.TextInput(attrs={'readonly':'readonly'}))
 
     class Meta:
-        model = Usuario
-        exclude = ['date_joined', 'last_login', 'is_admin', 'is_staff', 'is_superuser', 'is_active', 'password']
+        model = Perfil
+        exclude = ['usuario']

@@ -54,12 +54,14 @@
             <div class="login-fields">
                 <p>Ud. necesita ser usuario para ingresar:</p>
                 <div class="field">
-                    <label for="email">Correo electronico:</label>
-                    {{ login_form.email }}
+                    <label for="username">Nombre de usuario:</label>
+                    {{ login_form.username }}
+                    {{ login_form.username.errors }}
                 </div> <!-- /field -->
                 <div class="field">
                     <label for="password">Password:</label>
                     {{ login_form.password }}
+                    {{ login_form.password.errors }}
                 </div> <!-- /password -->
             </div> <!-- /login-fields -->
             <div class="login-actions">

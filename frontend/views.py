@@ -19,13 +19,14 @@ def login(request):
     form_login = login_form.is_valid()
 
     if form_login:
-        email = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(username=email, password=password)
+
+        user = authenticate(username=username, password=password)
 
         if user:
             auth_login(request, user)
-            messages.success(request, 'Bienvenido ' + request.user.get_short_name() + '.')
+            messages.success(request, 'Bienvenido ' + request.user.username+ '.')
             return HttpResponseRedirect('/home')
         else:
             messages.error(request, 'Tu nombre de usuario o contraseña es incorrecto.')

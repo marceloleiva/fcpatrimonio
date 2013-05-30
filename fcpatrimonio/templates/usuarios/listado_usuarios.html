@@ -25,19 +25,19 @@
                     {% for usuario in usuarios %}
                         <tr {% if usuario.user.is_active == 0 %}class="error" {% endif %}>
                             <td>{{ usuario.id }}</td>
-                            <td>{{ usuario.first_name }} {{ usuario.last_name }}</td>
+                            <td>{{ usuario.nombre }} {{ usuario.apellido_paterno }}</td>
                             <td>{{ usuario.celular }}</td>
                             <td>
-                                {% if usuario.is_staff %}
+                                {% if usuario.usuario.is_staff %}
                                     <a href="#" class="btn btn-small btn-info"><i class="icon-user"></i></a>
                                     <a href="{% url 'usuarios:editar_usuario'  usuario.pk %}" class="btn btn-small btn-warning"><i class="icon-pencil"></i></a>
                                 {% else %}
                                     <a href="#" class="btn btn-small btn-info"><i class="icon-user"></i></a>
                                     <a href="{% url 'usuarios:editar_usuario'  usuario.pk %}" class="btn btn-small btn-warning"><i class="icon-pencil"></i></a>
-                                    {% if usuario.is_active == 1 %}
-                                        <a href="{% url 'usuarios:eliminar_usuario'  usuario.pk %}" class="btn btn-small btn-danger"><i class="icon-remove"></i></a>
+                                    {% if usuario.usuario.is_active == 1 %}
+                                        <a href="{% url 'usuarios:eliminar_usuario'  usuario.usuario.pk %}" class="btn btn-small btn-danger"><i class="icon-remove"></i></a>
                                     {% else %}
-                                        <a href="{% url 'usuarios:activar_usuario'  usuario.pk %}" class="btn btn-small btn-success"><i class="icon-ok"></i></a>
+                                        <a href="{% url 'usuarios:activar_usuario'  usuario.usuario.pk %}" class="btn btn-small btn-success"><i class="icon-ok"></i></a>
                                     {% endif %}
                                 {% endif %}
                             </td>

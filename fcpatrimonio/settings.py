@@ -5,7 +5,7 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
 
-PRODUCCION = True
+PRODUCCION = False
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -15,18 +15,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'fcpatrimonio_db',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-
-    }
-}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -74,23 +62,35 @@ if PRODUCCION:
     STATIC_ROOT = '/home/malaleche/django.mentix.cl/public/static'
 
     STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-
     )
 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'fcpatrimonio',
+            'USER': 'fcpatrimonio',
+            'PASSWORD': 'fcpatrimonio',
+            'HOST': '',
+
+        }
+    }
 else:
     STATIC_ROOT = ''
 
     STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-
-    os.path.join(RUTA_PROYECTO,'static'),
-
+        os.path.join(RUTA_PROYECTO,'static'),
     )
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'fcpatrimonio',
+            'USER': 'fcpatrimonio',
+            'PASSWORD': 'fcpatrimonio',
+            'HOST': '',
+
+        }
+    }
 
 
 # URL prefix for static files.
@@ -156,6 +156,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
 
+    'tastypie',
     'bootstrap_toolkit',
     'endless_pagination',
     'south',
@@ -200,11 +201,11 @@ TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
 )
 
-AUTH_USER_MODEL = 'usuarios.Usuario'
-
 LOGIN_REDIRECT_URL = '/home/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 #PAGINADOR
 ENDLESS_PAGINATION_PER_PAGE = 10
+
+AUTH_PROFILE_MODULE = 'usuarios.Perfil'

@@ -5,8 +5,6 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from usuarios.form import UsuarioForm, UsuarioFormEdit
-from usuarios.models import Usuario
 
 from endless_pagination.decorators import page_template
 
